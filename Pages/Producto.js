@@ -1,32 +1,40 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, StyleSheet, Text, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles";
 import productsJson from '../Datos/products.json'
 import { useEffect, useState } from "react";
 
-export const Productos = ({navigation, route}) => {
-  const { category } = route.params;
-  const [ products, setProducts ] = useState([])
+export const Producto = ({route}) => {
+  const { id } = route.params;
+  const [ product, setProduct ] = useState({})
 
   useEffect(() => {
-    const filter = productsJson.filter(product => product.category === category)
-    setProducts(filter)
+    const filter = productsJson.find(product => product.id === id)
+    setProduct(filter)
   },[])
 
   return (
       <View style={globalStyles.container}>
         <View style={styles.container}>
-          {products?.map(product => {
-            return (
-              <View key={product.id} style={styles.cardContainer} >
-                <TouchableOpacity onPress={() => navigation.navigate('Producto', {product: product.title, id: product.id})}>
-                  <Text style={styles.cardText}>  
-                      {product.title}
-                  </Text>
-                  <Image source={{uri: product.thumbnail}} style={styles.cardImage}/>
-                </TouchableOpacity>
-              </View>
-            )
-          })}
+            <View style={styles.cardContainer}>
+            <Text style={styles.cardText}>  
+                {product.title}
+            </Text>
+            <Image source={{uri: product.thumbnail}} style={styles.cardImage}/>
+            </View>
+        </View>
+        <View>
+            <Text>
+                {product.description}
+            </Text>
+            <Text>
+               $ {product.price}
+            </Text>
+            <Text>
+                {product.discountPercentage}
+            </Text>
+            <Text>
+                {product.stock}
+            </Text>
         </View>
       </View>
     )

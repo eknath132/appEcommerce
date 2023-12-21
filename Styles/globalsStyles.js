@@ -11,10 +11,10 @@ export const globalStyles = StyleSheet.create({
         padding: 20,
         gap:10,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection:'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        // flexDirection:'row',
+        // flexWrap: 'wrap',
+        // justifyContent: 'space-between',
     }
 })

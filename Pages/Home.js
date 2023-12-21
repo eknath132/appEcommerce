@@ -1,20 +1,17 @@
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles";
-import { Card } from "../Components/Home/Cards";
-
+import categories from '../Datos/categories.json'
+import ListaCategory from "../Components/Home/ListCategory";
 export const Home = ({ navigation }) => {
     return (
       <ScrollView style={globalStyles.scroll}>
         <View style={globalStyles.container}>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          {categories.map(category => {
+            return (
+              <ListaCategory key={category} title={category} navigation={navigation}/>
+            )
+          })}
+          
         </View>
       </ScrollView>
     )
