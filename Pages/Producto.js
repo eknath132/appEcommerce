@@ -1,42 +1,62 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, Pressable, StyleSheet, Text, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles";
 import productsJson from '../Datos/products.json'
 import { useEffect, useState } from "react";
+import { Button } from "react-native-paper";
+import { pushCarrito } from "../Features/shop/shopSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Producto = ({route}) => {
-  const { id } = route.params;
-  const [ product, setProduct ] = useState({})
+    const { id } = route.params;
+    const [ product, setProduct ] = useState({})
+    const { products } = useSelector(state => state.shop.value)
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        const filter = products.find(product => product.id === id)
+        setProduct(filter)
+    },[products])
 
-  useEffect(() => {
-    const filter = productsJson.find(product => product.id === id)
-    setProduct(filter)
-  },[])
-
-  return (
-      <View style={globalStyles.container}>
-        <View style={styles.container}>
-            <View style={styles.cardContainer}>
-            <Text style={styles.cardText}>  
-                {product.title}
-            </Text>
-            <Image source={{uri: product.thumbnail}} style={styles.cardImage}/>
+    return (
+        <View style={globalStyles.container}>
+            <View style={styles.container}>
+                <View style={styles.cardContainer}>
+                    <Text numberOfLines={1} style={styles.cardText}>  
+                        {product.title}
+                    </Text>
+                    <Image source={{uri: product.thumbnail}} style={styles.cardImage}/>
+                </View>
+                <View style={styles.containerInfo}>
+                    <Text style={styles.titleText}>
+                        Descripcion: 
+                    </Text>
+                    <Text numberOfLines={3} style={styles.textInfo}>
+                        {product.description} sd as dasd asda sasd asdawwd asd asd  asdasd asd asd asd asd
+                    </Text>
+                    <Text style={styles.titleText}>
+                        Precio: 
+                    </Text>
+                    <Text style={styles.textInfo}>
+                        $ {product.price}
+                    </Text>
+                    <Text style={styles.titleText}>
+                        Descuento: 
+                    </Text>
+                    <Text style={styles.textInfo}>
+                        {product.discountPercentage}
+                    </Text>
+                    <Text style={styles.titleText}>
+                        Stock: 
+                    </Text>
+                    <Text style={styles.textInfo}>
+                        {product.stock}
+                    </Text>
+                    <Button icon={'cart'} mode={"contained"} style={styles.buttonInfo} onPress={() => dispatch(pushCarrito(product))} disabled={ !product.stock }>
+                        Agregar al carrito
+                    </Button>
+                </View>
             </View>
         </View>
-        <View>
-            <Text>
-                {product.description}
-            </Text>
-            <Text>
-               $ {product.price}
-            </Text>
-            <Text>
-                {product.discountPercentage}
-            </Text>
-            <Text>
-                {product.stock}
-            </Text>
-        </View>
-      </View>
     )
 }
 
@@ -47,13 +67,13 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       flexDirection:'row',
       flexWrap: 'wrap',
-      gap: 16
+      gap: 16,
     },
     cardContainer: {
       width: '30%',
       height: 300,
       borderRadius: 8,
-      marginBottom: 24
+      marginBottom: 24,
     },
     cardImage:{
       width:'100%',
@@ -63,9 +83,30 @@ const styles = StyleSheet.create({
       borderColor: 'black'
     },
     cardText: {
-      fontSize: 16,
+      fontSize: 24,
       textAlign:'center',
       width:'100%',
       color:'black'
+    },
+    // INFO
+    containerInfo: {
+      width:'60%',
+      height: 350,
+      overflow:'hidden',
+      // backgroundColor: 'red'
+    },
+    titleText: {
+      fontWeight: '700',
+      fontSize: 20,
+      marginTop: 20
+    },
+    textInfo: {
+      fontSize: 18,
+      marginLeft: 4
+    },
+    buttonInfo: {
+      position: 'absolute',
+      bottom: 0,
+      alignSelf:'center'
     }
 });
