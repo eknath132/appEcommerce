@@ -9,8 +9,9 @@ export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        gap:10,
+        marginBottom: 10,
         backgroundColor: '#fff',
+        flexDirection: 'column'
         // alignItems: 'center',
         // justifyContent: 'center',
         // flexDirection:'row',

@@ -13,6 +13,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ShopStack } from './Navigation/shop';
 import { CartStack } from './Navigation/cart';
 import { Entypo } from '@expo/vector-icons'
+import { LoginStack } from './Navigation/login';
+import { MainNavigator } from './Pages/MainNavigation';
 const Tabs = createBottomTabNavigator()
 
 const App = () => {
@@ -20,19 +22,7 @@ const App = () => {
         <PaperProvider>
             <StatusBar/>
             <Provider store={store}>
-                <NavigationContainer>
-                    <Tabs.Navigator
-                        screenOptions={{
-                            headerShown: false,
-                            tabBarShowLabel: false,
-                            tabBarStyle: styles.tabBar
-
-                        }}
-                    >
-                        <Tabs.Screen name='Principal' component={ShopStack} options={{tabBarIcon: () => <Entypo name='home' size={40} color={'#fff'}/>}}/>
-                        <Tabs.Screen name='Cart' component={CartStack} options={{tabBarIcon: () => <Entypo name='shop' size={40} color={'#fff'}/>}}/>
-                    </Tabs.Navigator>
-                </NavigationContainer>
+                <MainNavigator/>
             </Provider>
         </PaperProvider>
     );
@@ -40,9 +30,3 @@ const App = () => {
 
 export default App;
 
-
-const styles = StyleSheet.create({
-    tabBar: {
-        backgroundColor: '#d0bcff'
-    }
-})

@@ -3,16 +3,13 @@ import { globalStyles } from "../Styles/globalsStyles";
 import categories from '../Datos/categories.json'
 import ListaCategory from "../Components/Home/ListCategory";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useGetCategoriesQuery } from "../App/services/shopServices";
 // import { increment, decrement } from "../Features/counter/counterSlice";
 
 export const Home = ({ navigation }) => {
 
-  const [ count, setCount ] = useState(0)
-  // const count2 = useSelector(state => state.counter.value)
-
-  const dispatch = useDispatch()
-
+  const { data, isLoading } =  useGetCategoriesQuery()
+  
     return (
       <ScrollView style={globalStyles.scroll}>
         <View style={globalStyles.container}>
@@ -22,7 +19,7 @@ export const Home = ({ navigation }) => {
             <Button title="Decrementar" onPress={() => dispatch(decrement())}/>
           </View> */}
           
-          {categories.map(category => {
+          { !isLoading && data?.map(category => {
             return (
               <ListaCategory key={category} title={category} navigation={navigation}/>
             )

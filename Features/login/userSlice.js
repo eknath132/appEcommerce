@@ -2,14 +2,27 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     value: {
-        carrito: [],
+        user: [],
+        token: '',
+        idUser:'',
     }
 }
 
-export const counterSlice = createSlice({
-    name: 'shop',
+export const loginSlice = createSlice({
+    name: 'login',
     initialState,
     reducers: {
+        saveToken: (state, actions) => {
+            const {user, token, idUser} = actions.payload
+            state.value.user = user
+            state.value.token = token
+            state.value.idUser = idUser
+
+        },
+        // saveInfoUser: (state, actions) => {
+            
+        // }
+
         pushCarrito: (state, actions) => {
             const productoExistenteCarrito = state.value.carrito.findIndex(product => product.id == actions.payload.id)
             
@@ -18,13 +31,12 @@ export const counterSlice = createSlice({
                 state.value.carrito[productoExistenteCarrito] = {...actions.payload, cantidad: cantidad + 1 }
                 return ;
             }
-            console.log('state', state.value.carrito)
             state.value.carrito.push({...actions.payload, cantidad: 1})
         }
     }
 
 })
 
-export const { pushCarrito } = counterSlice.actions
+export const { saveToken } = loginSlice.actions
 
-export default counterSlice.reducer
+export default loginSlice.reducer

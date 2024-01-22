@@ -1,20 +1,21 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles";
-import productsJson from '../Datos/products.json'
 import { useEffect, useState } from "react";
+import { useGetProductsQuery } from "../App/services/shopServices";
 
 export const Productos = ({navigation, route}) => {
   const { category } = route.params;
+  const {data} = useGetProductsQuery(category)
   const [ products, setProducts ] = useState([])
 
   useEffect(() => {
-    const filter = productsJson.filter(product => product.category === category)
-    setProducts(filter)
-  },[])
+    if(data) {
+      setProducts(Object.values(data))
+    }
+  },[data])
 
   return (
-      <View style={globalStyles.container}>
-        <View style={styles.container}>
+        <ScrollView style={globalStyles.scroll} contentContainerStyle={styles.container}>
           {products?.map(product => {
             return (
               <View key={product.id} style={styles.cardContainer} >
@@ -27,25 +28,29 @@ export const Productos = ({navigation, route}) => {
               </View>
             )
           })}
-        </View>
-      </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
+    scrollView: {
+      flex: 1,
+      width: '100%',
+    },
     container: {
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       flexDirection:'row',
       flexWrap: 'wrap',
-      gap: 16
+      paddingHorizontal: 8
     },
     cardContainer: {
-      width: '30%',
+      width: '49%',
       height: 300,
       borderRadius: 8,
-      marginBottom: 24
+      marginBottom: 24,
+      marginTop:30
     },
     cardImage:{
       width:'100%',

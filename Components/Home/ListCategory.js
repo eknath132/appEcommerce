@@ -20,6 +20,7 @@ const ListaCategory = ({title, navigation}) => (
 const styles = StyleSheet.create({
     cardContent:{
         flexDirection:'row',
+        marginBottom: 10
     },
     contentContainer: {
         flexDirection: 'row',

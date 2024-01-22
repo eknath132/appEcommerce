@@ -1,61 +1,56 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native"
+import { Image, StyleSheet, Text, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles";
-import productsJson from '../Datos/products.json'
-import { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { pushCarrito } from "../Features/shop/shopSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useGetProductQuery } from "../App/services/shopServices";
 
 export const Producto = ({route}) => {
     const { id } = route.params;
-    const [ product, setProduct ] = useState({})
-    const { products } = useSelector(state => state.shop.value)
+    const {data: product, isLoading} = useGetProductQuery(id)
     const dispatch = useDispatch()
     
-    useEffect(() => {
-        const filter = products.find(product => product.id === id)
-        setProduct(filter)
-    },[products])
-
     return (
         <View style={globalStyles.container}>
-            <View style={styles.container}>
-                <View style={styles.cardContainer}>
-                    <Text numberOfLines={1} style={styles.cardText}>  
-                        {product.title}
-                    </Text>
-                    <Image source={{uri: product.thumbnail}} style={styles.cardImage}/>
+            {!isLoading && 
+                <View style={styles.container}>
+                    <View style={styles.cardContainer}>
+                        <Text numberOfLines={1} style={styles.cardText}>  
+                            {product.title}
+                        </Text>
+                        <Image source={{uri: product.thumbnail}} style={styles.cardImage}/>
+                    </View>
+                    <View style={styles.containerInfo}>
+                        <Text style={styles.titleText}>
+                            Descripcion: 
+                        </Text>
+                        <Text numberOfLines={3} style={styles.textInfo}>
+                            {product.description} sd as dasd asda sasd asdawwd asd asd  asdasd asd asd asd asd
+                        </Text>
+                        <Text style={styles.titleText}>
+                            Precio: 
+                        </Text>
+                        <Text style={styles.textInfo}>
+                            $ {product.price}
+                        </Text>
+                        <Text style={styles.titleText}>
+                            Descuento: 
+                        </Text>
+                        <Text style={styles.textInfo}>
+                            {product.discountPercentage}
+                        </Text>
+                        <Text style={styles.titleText}>
+                            Stock: 
+                        </Text>
+                        <Text style={styles.textInfo}>
+                            {product.stock}
+                        </Text>
+                        <Button icon={'cart'} mode={"contained"} style={styles.buttonInfo} onPress={() => dispatch(pushCarrito(product))} disabled={ !product.stock }>
+                            Agregar al carrito
+                        </Button>
+                    </View>
                 </View>
-                <View style={styles.containerInfo}>
-                    <Text style={styles.titleText}>
-                        Descripcion: 
-                    </Text>
-                    <Text numberOfLines={3} style={styles.textInfo}>
-                        {product.description} sd as dasd asda sasd asdawwd asd asd  asdasd asd asd asd asd
-                    </Text>
-                    <Text style={styles.titleText}>
-                        Precio: 
-                    </Text>
-                    <Text style={styles.textInfo}>
-                        $ {product.price}
-                    </Text>
-                    <Text style={styles.titleText}>
-                        Descuento: 
-                    </Text>
-                    <Text style={styles.textInfo}>
-                        {product.discountPercentage}
-                    </Text>
-                    <Text style={styles.titleText}>
-                        Stock: 
-                    </Text>
-                    <Text style={styles.textInfo}>
-                        {product.stock}
-                    </Text>
-                    <Button icon={'cart'} mode={"contained"} style={styles.buttonInfo} onPress={() => dispatch(pushCarrito(product))} disabled={ !product.stock }>
-                        Agregar al carrito
-                    </Button>
-                </View>
-            </View>
+            }
         </View>
     )
 }
