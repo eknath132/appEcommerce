@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { Cart } from "../Pages/Cart";
+import { Favorito } from "../Pages/Favorito";
 
 const Stack = createNativeStackNavigator()
 
-export const CartStack = () => {
+export const FavoritoStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name='Carrito' component={Cart} />
+            <Stack.Screen name='Favorito' component={Favorito} />
         </Stack.Navigator>
     )
 }

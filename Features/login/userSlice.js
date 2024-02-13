@@ -19,24 +19,15 @@ export const loginSlice = createSlice({
             state.value.idUser = idUser
 
         },
-        // saveInfoUser: (state, actions) => {
-            
-        // }
-
-        pushCarrito: (state, actions) => {
-            const productoExistenteCarrito = state.value.carrito.findIndex(product => product.id == actions.payload.id)
-            
-            if ( productoExistenteCarrito != -1) {
-                let cantidad = state.value.carrito[productoExistenteCarrito].cantidad
-                state.value.carrito[productoExistenteCarrito] = {...actions.payload, cantidad: cantidad + 1 }
-                return ;
-            }
-            state.value.carrito.push({...actions.payload, cantidad: 1})
+        clearUser: () => {
+            state.value.user = []
+            state.value.token = ''
+            state.value.idUser = ''
         }
     }
 
 })
 
-export const { saveToken } = loginSlice.actions
+export const { saveToken, clearUser } = loginSlice.actions
 
 export default loginSlice.reducer

@@ -2,12 +2,16 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles"
 import { useSelector } from "react-redux"
 import { Button, IconButton } from "react-native-paper"
+import { TarjetaLista } from "../Components/Home/listaAnimales"
+import { TarjetaFavorito } from "../Components/TarjeteFavorito.js/tarjetaFavorito"
 
-export const Cart = () => {
-    const { carrito } = useSelector(state => state.shop.value)
+export const Favorito = ({navigation}) => {
+    // const { idUser } = useSelector(state => state.login.value)
+    const {favoritos} = useSelector(state => state.pets.value)
+
     return (
-        <ScrollView style={globalStyles.scroll} contentContainerStyle={styles.container}>
-            <View style={globalStyles.container}>
+        <ScrollView style={globalStyles.scroll}>
+            {/* <View style={globalStyles.container}>
                 {carrito.map( producto => {
                     return (        
                         <View key={producto.id} style={styles.cardContainer}>
@@ -33,7 +37,12 @@ export const Cart = () => {
                         </View>
                     )
                 })}
-            </View>
+            </View> */}
+            { favoritos?.map(pet => {
+            return (
+              <TarjetaFavorito key={pet.id} pet={pet} navigation={navigation}/>
+            )
+          })}
         </ScrollView>
     )
 }

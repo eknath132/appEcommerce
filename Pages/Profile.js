@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react"
 import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native"
 import { Button, Icon } from "react-native-paper"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import * as ImagePicker from  'expo-image-picker'
 import { useGetInfoUserQuery, usePostInfoUserMutation } from "../App/services/loginServices"
 import { globalStyles } from "../Styles/globalsStyles"
+import { clearUser } from "../Features/login/userSlice"
+import { deleteSession } from "../Bd"
 
 export const PerfilComponent = () => {
     const { user, idUser } = useSelector(state => state.login.value)
+    const dispatch = useDispatch()
     const {data, isSuccess} = useGetInfoUserQuery(idUser)
     const [ edit, setEdit ] = useState(false)
     const [ image, setImage ] = useState('')
     const [ nombreForm, setNombreForm ] = useState('')
     const [ edadForm, setEdadForm ] = useState('')
+    const [ telForm, setTelForm ] = useState('')
+
     const [ mutate, {error} ] = usePostInfoUserMutation()
 
     useEffect(() => {
         if(isSuccess) {
-            setNombreForm(() => data.nombre)
-            setEdadForm(() => data.edad)
-            setImage(() => data.imagen)
+            setNombreForm(() => data?.nombre)
+            setEdadForm(() => data?.edad)
+            setImage(() => data?.imagen)
+            setTelForm(() => data?.tel)
+
         } 
     },[data])
 
@@ -41,7 +48,7 @@ export const PerfilComponent = () => {
 
 
     const guardarInfo = () => {
-        mutate({idUser, info: {nombre: nombreForm, edad: edadForm, imagen: image}}).then((data) => setEdit(prev => !prev))
+        mutate({idUser, info: {nombre: nombreForm, edad: edadForm, imagen: image, tel: telForm}}).then((data) => setEdit(prev => !prev))
     }
 
     return (
@@ -58,12 +65,6 @@ export const PerfilComponent = () => {
             <View style={style.containerDatos}>
                 <View style={style.containerDatosRow}>
                     <Text style={style.textInfo}>
-                        Email: {' '}
-                    </Text>
-                    <TextInput style={style.textInfoInput} editable={false} value={user}/>
-                </View>
-                <View style={style.containerDatosRow}>
-                    <Text style={style.textInfo}>
                         Nombre: {' '}
                     </Text>
                     <TextInput style={style.textInfoInput} onChangeText={(text) => setNombreForm(() => text)} editable={edit} value={nombreForm}/>
@@ -73,6 +74,21 @@ export const PerfilComponent = () => {
                         Edad: {' '}
                     </Text>
                     <TextInput style={style.textInfoInput} onChangeText={(text) => setEdadForm(() => text)} editable={edit} value={edadForm}/>
+                </View>
+                <View style={style.containerDatosRow}>
+                    <Text style={style.textInfo}>
+                        Email: {' '}
+                    </Text>
+                    <TextInput style={style.textInfoInput} editable={false} value={user}/>
+                </View>
+                <View style={style.containerDatosRow}>
+                    <Text style={style.textInfo}>
+                        Celular: {' '}
+                    </Text>
+                    <TextInput style={style.textInfoInput} onChangeText={(text) => setTelForm(() => text)} editable={edit} value={telForm}/>
+                </View>
+                <View style={{marginTop: 36}}>
+                    <Button mode="contained" onPress={() => {deleteSession({localId: idUser}), dispatch(clearUser())}}> Cerrar sesion </Button>
                 </View>
             </View>
             <View style={{marginTop: 36}}>

@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     value: {
-        carrito: [],
+        favoritos: [],
     }
 }
 
-export const counterSlice = createSlice({
-    name: 'shop',
+export const mascotaSlice = createSlice({
+    name: 'mascotas',
     initialState,
     reducers: {
         pushCarrito: (state, actions) => {
@@ -19,11 +19,15 @@ export const counterSlice = createSlice({
                 return ;
             }
             state.value.carrito.push({...actions.payload, cantidad: 1})
+        }, 
+        buscarInfoFavorito: (state, actions) => {
+            const newFavoritos = actions.payload.mascotas.filter(mascota => actions.payload.ids.includes(mascota.id)) 
+            state.value.favoritos = newFavoritos
         }
     }
 
 })
 
-export const { pushCarrito } = counterSlice.actions
+export const { buscarInfoFavorito } = mascotaSlice.actions
 
-export default counterSlice.reducer
+export default mascotaSlice.reducer
