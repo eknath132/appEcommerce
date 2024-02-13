@@ -1,6 +1,6 @@
-import { KeyboardAvoidingView, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from "react-native"
+import { Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles"
-import { Button, Icon, Text, TextInput } from "react-native-paper"
+import { Button, Text } from "react-native-paper"
 import { useState } from "react"
 import { CssTextInput } from "../Components/cssTextInput"
 import { usePostLoginMutation } from "../App/services/loginServices"
@@ -30,15 +30,9 @@ export const SignIn = ({navigation}) => {
 
     return (
         <>
-            {/* <StatusBar backgroundColor="#d0bcff" barStyle="light-content" /> */}
             <SafeAreaView style={{flex:1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 }}>
                 <ScrollView style={globalStyles.scroll} contentContainerStyle={{...globalStyles.container,}}>
                     <View style={style.containerSingUp}>
-                        {/* <View>
-                            <Text style={style.textPrincipal}>
-                                LOGIN
-                            </Text>
-                        </View> */}
                         <View style={style.inputsContainer}>
                             <CssTextInput label={'Email'} value={email} changeText={setEmail}/>
                             <CssTextInput label={'Password'} value={password} changeText={setPassword} security/>

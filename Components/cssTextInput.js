@@ -1,6 +1,4 @@
-import { View } from "react-native"
 import { TextInput } from "react-native-paper"
-// import { TextInput } from "react-native-paper"
 
 export const CssTextInput = ({label, value, changeText, security = false, disabled = false}) => {
     return (
@@ -13,7 +11,6 @@ export const CssTextInput = ({label, value, changeText, security = false, disabl
             placeholderTextColor='#fff'
             disabled={disabled}
             style={{
-                // borderColor: 'black',
                 padding: 1,
                 marginBottom: 24,
                 backgroundColor:'#a897d1'

@@ -1,16 +1,11 @@
-import { Button, Pressable, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native"
 import { globalStyles } from "../Styles/globalsStyles";
-import categories from '../Datos/categories.json'
 import {TarjetaLista } from "../Components/Home/listaAnimales";
 import { useState } from "react";
-import { useGetCategoriesQuery } from "../App/services/shopServices";
-import { useGetFavoritesQuery, useGetPetsQuery } from "../App/services/mascotas";
+import { useGetPetsQuery } from "../App/services/mascotas";
 import { Icon } from "react-native-paper";
-import { useSelector } from "react-redux";
-// import { increment, decrement } from "../Features/counter/counterSlice";
 
 export const ListaAnimales = ({ navigation }) => {
-  const { idUser } = useSelector(state => state.login.value)
   const { data, isLoading } =  useGetPetsQuery()
 
   const [ selectItem, setSelectItem ] = useState('perro')

@@ -9,7 +9,6 @@ export const PetsStack = () => {
         <Stack.Navigator>
             <Stack.Screen name='Mascotas' component={ListaAnimales} />
             <Stack.Screen name='MascotaDescripcion' component={MascotaDescripcion} options={{headerTitle: ''}}/>
-            {/* <Stack.Screen name='Producto' component={Producto} options={({ route }) => ({ title: route.params.product })}/> */}
         </Stack.Navigator>
     )
 }

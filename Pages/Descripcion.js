@@ -97,24 +97,4 @@ const styles = StyleSheet.create({
       color: '#fff',
       textAlign:'center'
     }
-    // cardContainer: {
-    //   width: '49%',
-    //   height: 300,
-    //   borderRadius: 8,
-    //   marginBottom: 24,
-    //   marginTop:30
-    // },
-    // cardImage:{
-    //   width:'100%',
-    //   height:'100%',
-    //   borderRadius: 8,
-    //   borderWidth: 1,
-    //   borderColor: 'black'
-    // },
-    // cardText: {
-    //   fontSize: 16,
-    //   textAlign:'center',
-    //   width:'100%',
-    //   color:'black'
-    // }
 });

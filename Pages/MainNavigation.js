@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { CartStack, FavoritoStack } from '../Navigation/cart';
+import { FavoritoStack } from '../Navigation/cart';
 import { StyleSheet } from 'react-native';
 import { Entypo } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux';

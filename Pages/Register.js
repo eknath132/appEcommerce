@@ -57,7 +57,6 @@ const style = StyleSheet.create({
     containerSingUp: {
         backgroundColor: '#d0bcff',
         width: '70%',
-        // height:'70%',
         marginLeft:'auto',
         marginRight:'auto',
         marginTop:'auto',

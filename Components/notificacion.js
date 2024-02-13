@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 
 const Notification = ({ message, duration = 5000 }) => {
-  const [fadeAnim] = useState(new Animated.Value(0)); // Inicialmente oculto
+  const [fadeAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
-    // Anima la notificación para que aparezca
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 500,
       useNativeDriver: true,
     }).start();
-
-    // Después de `duration`, oculta la notificación
     const timer = setTimeout(() => {
       Animated.timing(fadeAnim, {
         toValue: 0,
@@ -34,7 +31,7 @@ const Notification = ({ message, duration = 5000 }) => {
 const styles = StyleSheet.create({
     notification: {
         position: 'absolute',
-        bottom: 10, // Ajusta según necesites
+        bottom: 10,
         left: 0,
         right: 0,
         backgroundColor: 'gray',

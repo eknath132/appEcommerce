@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Icon, MD3Colors } from 'react-native-paper';
 import { globalStyles } from '../../Styles/globalsStyles';
-import { useGetFavoritesQuery, usePostFavoriteMutation } from '../../App/services/mascotas';
-import { useDispatch, useSelector } from 'react-redux';
-import { buscarInfoFavorito } from '../../Features/mascotasFavoritas/mascotasSlice';
 
 export const TarjetaFavorito = ({pet, data}) => {
     const [notificacion, setNotificacion] = useState(false)
