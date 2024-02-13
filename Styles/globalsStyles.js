@@ -12,10 +12,5 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 10,
         backgroundColor: '#fff',
         flexDirection: 'column'
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // flexDirection:'row',
-        // flexWrap: 'wrap',
-        // justifyContent: 'space-between',
     }
 })

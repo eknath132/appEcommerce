@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Icon, MD3Colors } from 'react-native-paper';
 import { globalStyles } from '../../Styles/globalsStyles';
+import Notification from '../notificacion';
 
 export const TarjetaFavorito = ({pet, data}) => {
     const [notificacion, setNotificacion] = useState(false)
@@ -24,8 +25,8 @@ export const TarjetaFavorito = ({pet, data}) => {
             <Pressable style={styles.iconoFavorito}>
                 <Icon source={'cards-heart'} size={20} color={MD3Colors.error50}/>
             </Pressable>
-            {notificacion && <Notification message="Nos pondremos en contacto, lo antes posible" />} 
 
+            {notificacion && <Notification message="Nos pondremos en contacto, lo antes posible" />} 
         </ScrollView>
     )
 };
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         height: 150,
         width: '100%',
+        flex:1,
         elevation: 2,
         backgroundColor: 'white',
         borderRadius: 15,

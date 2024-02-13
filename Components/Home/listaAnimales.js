@@ -30,7 +30,7 @@ export const TarjetaLista = ({pet, navigation, data}) => {
     }
     
     useEffect(() => {
-        const ids = favoritos?.ids  ? `${favoritos?.ids}, ${pet.id}` : `${pet.id}`
+        const ids = `${favoritos?.ids}`
         dispatch(buscarInfoFavorito({mascotas: data, ids: ids}))
         if(favoritos?.ids.includes(pet.id)) {
             setFavorito(true)

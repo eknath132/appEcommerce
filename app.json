@@ -27,6 +27,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "eknath132"
+    "owner": "eknath132",
+    "extra": {
+      "eas": {
+        "projectId": "4162ad91-f42d-4eb0-b9f9-af0a793859d0"
+      }
+    }
   }
 }
