@@ -32,7 +32,13 @@ export const SignIn = ({navigation}) => {
         <>
             <SafeAreaView style={{flex:1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 }}>
                 <ScrollView style={globalStyles.scroll} contentContainerStyle={{...globalStyles.container,}}>
+                    
                     <View style={style.containerSingUp}>
+                    <View>
+                        <Text style={style.textPrincipal}>
+                            Login
+                        </Text>
+                    </View>
                         <View style={style.inputsContainer}>
                             <CssTextInput label={'Email'} value={email} changeText={setEmail}/>
                             <CssTextInput label={'Password'} value={password} changeText={setPassword} security/>

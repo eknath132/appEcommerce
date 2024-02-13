@@ -19,7 +19,7 @@ export const Register = ({navigation}) => {
             setVerifyPassword(() => true)
             return
         }
-        mutate({email, password}).then(() => navigation.navigate('SignIn'))
+        mutate({email, password}).then((data) => {navigation.navigate('SingIn')}).catch((err) => console.log('Error', err))
     }
 
     return (
@@ -28,7 +28,7 @@ export const Register = ({navigation}) => {
             <View style={style.containerSingUp}>
                 <View>
                     <Text style={style.textPrincipal}>
-                        LOGIN
+                        Registrarse
                     </Text>
                 </View>
                 <View style={style.inputsContainer}>

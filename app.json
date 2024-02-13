@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "appEcommerce",
-    "slug": "appEcommerce",
+    "slug": "appecommerce",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,10 +27,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "c2c1b8be-ae38-4e52-a643-e6e2bf229a28"
-      }
-    }
+    "owner": "eknath132"
   }
 }

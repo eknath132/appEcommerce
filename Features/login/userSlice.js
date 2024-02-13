@@ -19,7 +19,7 @@ export const loginSlice = createSlice({
             state.value.idUser = idUser
 
         },
-        clearUser: () => {
+        clearUser: (state) => {
             state.value.user = []
             state.value.token = ''
             state.value.idUser = ''
